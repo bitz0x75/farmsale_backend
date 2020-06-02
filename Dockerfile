@@ -20,7 +20,7 @@ WORKDIR /app
 
 # #Import local packages
 # RUN go get "config/mdb"
-# RUN go get "models/productsmodel"
+RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
 # RUN go get "controllers/productscontroller"
 
 # we run go build to compile the binary
