@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"farmsale_backend/models/productsmodel"
+	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 )
 
 func Index(w http.ResponseWriter, req *http.Request) {

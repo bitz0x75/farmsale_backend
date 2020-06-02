@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 	"os"
-	"farmsale_backend/controllers/productscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
 )
 
 func main() {

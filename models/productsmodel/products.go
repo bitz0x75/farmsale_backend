@@ -3,7 +3,7 @@ package productsmodel
 import (
 	"context"
 	"time"
-	"farmsale_backend/config/mdb"
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
 
 	"go.mongodb.org/mongo-driver/bson"
 )
