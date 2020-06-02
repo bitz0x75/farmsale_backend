@@ -6,17 +6,22 @@ FROM golang:1.10
 # We create an /app directory within our
 # image that will hold our application source
 # files
-RUN mkdir /farmsale_backend
+RUN mkdir /app
 
 # We copy everything in the root directory
 # into our /app directory
-ADD . /farmsale_backend
+ADD . /app
 
 # We specify that we now wish to execute 
 # any further commands inside our /app
 # directory
 
-WORKDIR /farmsale_backend
+WORKDIR /app
+
+#Import local packages
+RUN go get "farmsale_backend/config/mdb"
+RUN go get "farmsale_backend/models/productsmodel"
+RUN go get "farmsale_backend/controllers/productscontroller"
 
 # we run go build to compile the binary
 # executable of our Go program
@@ -24,4 +29,4 @@ RUN go build -o main
 
 # Our start command which kicks off
 # our newly created binary executable
-CMD ["/farmsale_backend/main"]
+CMD ["/app/main"]
