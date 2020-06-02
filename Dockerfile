@@ -11,7 +11,7 @@ RUN mkdir /app
 # We copy everything in the root directory
 # into our /app directory
 ADD . /app
-
+RUN touch /app/.env
 # We specify that we now wish to execute 
 # any further commands inside our /app
 # directory
@@ -20,7 +20,7 @@ WORKDIR /app
 
 # #Import local packages
 # RUN go get "config/mdb"
-RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+# RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
 # RUN go get "controllers/productscontroller"
 
 # we run go build to compile the binary
