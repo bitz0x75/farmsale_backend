@@ -19,9 +19,9 @@ ADD . /app
 WORKDIR /app
 
 #Import local packages
-RUN go get "farmsale_backend/config/mdb"
-RUN go get "farmsale_backend/models/productsmodel"
-RUN go get "farmsale_backend/controllers/productscontroller"
+RUN go get "app/config/mdb"
+RUN go get "app/models/productsmodel"
+RUN go get "app/controllers/productscontroller"
 
 # we run go build to compile the binary
 # executable of our Go program
