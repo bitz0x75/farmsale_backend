@@ -19,9 +19,9 @@ RUN touch /app/.env
 WORKDIR /app
 
 # #Import local packages
-# RUN go get "config/mdb"
-# RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
-# RUN go get "controllers/productscontroller"
+RUN go get "github.com/maxwellgithinji/farmsale_backendconfig/mdb"
+RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+RUN go get "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 
 # we run go build to compile the binary
 # executable of our Go program
