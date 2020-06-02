@@ -1,10 +1,10 @@
 package productscontroller
 
 import (
-	"net/http"
-	"models/productsmodel"
 	"encoding/json"
 	"fmt"
+	"models/productsmodel"
+	"net/http"
 )
 
 func Index(w http.ResponseWriter, req *http.Request) {
@@ -17,7 +17,7 @@ func Index(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, http.StatusText(500), 500)
 		return
 	}
-	
+
 	prodj, err := json.Marshal(prods)
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
