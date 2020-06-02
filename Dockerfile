@@ -19,7 +19,7 @@ RUN touch /app/.env
 WORKDIR /app
 
 # #Import local packages
-RUN go get "github.com/maxwellgithinji/farmsale_backendconfig/mdb"
+RUN go get "github.com/maxwellgithinji/farmsale_backend/config/mdb"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 
