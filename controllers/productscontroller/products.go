@@ -3,8 +3,8 @@ package productscontroller
 import (
 	"encoding/json"
 	"fmt"
-	"models/productsmodel"
 	"net/http"
+	"farmsale_backend/models/productsmodel"
 )
 
 func Index(w http.ResponseWriter, req *http.Request) {

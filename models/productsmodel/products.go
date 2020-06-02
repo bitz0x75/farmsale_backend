@@ -1,9 +1,9 @@
 package productsmodel
 
 import (
-	"config/mdb"
 	"context"
 	"time"
+	"farmsale_backend/config/mdb"
 
 	"go.mongodb.org/mongo-driver/bson"
 )

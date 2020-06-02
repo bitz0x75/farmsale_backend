@@ -1,9 +1,9 @@
 package main
 
 import (
-	"controllers/productscontroller"
 	"net/http"
 	"os"
+	"farmsale_backend/controllers/productscontroller"
 )
 
 func main() {
