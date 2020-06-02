@@ -10,6 +10,7 @@ func main() {
 	port := os.Getenv("PORT")
 	http.HandleFunc("/", index)
 	http.HandleFunc("/products", productscontroller.Index)
+	http.Handle("/favicon.ico", http.NotFoundHandler())
 	http.ListenAndServe(":"+port, nil)
 }
 
