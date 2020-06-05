@@ -19,7 +19,7 @@ type error interface {
 }
 
 var DB = mdb.ConnectDB()
-var Products = DB.Collection("users")
+var Products = DB.Collection("products")
 
 func Index(w http.ResponseWriter, req *http.Request) {
 
