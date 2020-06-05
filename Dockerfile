@@ -22,7 +22,6 @@ WORKDIR /app
 RUN go get "github.com/maxwellgithinji/farmsale_backend/config/mdb"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
-RUN go get "github.com/maxwellgithinji/farmsale_backend/config/mdb"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
 
 # we run go build to compile the binary
