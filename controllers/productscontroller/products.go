@@ -1,11 +1,11 @@
 package productscontroller
 
 import (
+	"context"
+	"encoding/json"
 	"farmsale_backend/config/mdb"
 	"farmsale_backend/models/productsmodel"
-	"encoding/json"
 	"net/http"
-	"context"
 	"time"
 )
 

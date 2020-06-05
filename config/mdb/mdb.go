@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -16,8 +17,17 @@ var (
 	DB *mongo.Database
 )
 
+func init() {
+	var err error
+	err = godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
+
 func ConnectDB() *mongo.Database {
-	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("DB_CONN_STR")))
+	connstr := os.Getenv("DB_CONN_STR")
+	client, err := mongo.NewClient(options.Client().ApplyURI(connstr))
 	if err != nil {
 		panic(err)
 	}
@@ -27,21 +37,21 @@ func ConnectDB() *mongo.Database {
 	if err != nil {
 		panic(err)
 	}
-	defer client.Disconnect(ctx)
+	// defer client.Disconnect(ctx)
 
 	//Select db according to the current environment
 	os.Getenv("ENV")
 	if os.Getenv("ENV") == "development" {
 		DB = client.Database("farmsaleDev")
-		fmt.Println("You connected to DEV database")//For demo only
+		fmt.Println("You connected to DEV database") //For demo only
 		return DB
 	} else if os.Getenv("ENV") == "production" {
 		DB = client.Database("farmsale")
-		fmt.Println("You connected to PROD database")//For demo only
+		fmt.Println("You connected to PROD database") //For demo only
 		return DB
 	} else if os.Getenv("ENV") == "testing" {
 		DB = client.Database("farmsaleTest")
-		fmt.Println("You connected to TEST database")//For demo only
+		fmt.Println("You connected to TEST database") //For demo only
 		return DB
 	} else {
 		err := os.Setenv("ENV", "development")
@@ -50,7 +60,7 @@ func ConnectDB() *mongo.Database {
 			return nil
 		}
 		DB = client.Database("farmsaleDev")
-		fmt.Println("You connected to DEV database")//For demo only
+		fmt.Println("You connected to DEV database") //For demo only
 		return DB
 	}
 }

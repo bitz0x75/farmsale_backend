@@ -1,21 +1,12 @@
 package main
 
 import (
+	"farmsale_backend/controllers/userscontroller"
 	"net/http"
 	"os"
-	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
-	"farmsale_backend/controllers/userscontroller"
-	"github.com/joho/godotenv"
-	"log"
-)
 
-func init() {
-	var err error
-	err = godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-}
+	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+)
 
 func main() {
 	port := os.Getenv("PORT")
