@@ -24,6 +24,9 @@ RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscont
 RUN go get "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
 
+#Import experimental packages
+RUN go get "golang.org/x/crypto/bcrypt"
+RUN go get "go.mongodb.org/mongo-driver/x/bsonx"
 # we run go build to compile the binary
 # executable of our Go program
 RUN go build -o main
