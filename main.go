@@ -1,11 +1,11 @@
 package main
 
 import (
-	"farmsale_backend/controllers/userscontroller"
 	"net/http"
 	"os"
 
 	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
 )
 
 func main() {

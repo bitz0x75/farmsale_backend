@@ -3,10 +3,11 @@ package productscontroller
 import (
 	"context"
 	"encoding/json"
-	"farmsale_backend/config/mdb"
-	"farmsale_backend/models/productsmodel"
 	"net/http"
 	"time"
+
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
+	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 )
 
 type ErrorResponse struct {
