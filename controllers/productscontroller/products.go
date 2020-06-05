@@ -1,31 +1,51 @@
 package productscontroller
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
+	"farmsale_backend/config/mdb"
+	"farmsale_backend/models/productsmodel"
 	"net/http"
-	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
+	"time"
 )
 
+type ErrorResponse struct {
+	Err string
+}
+
+type error interface {
+	Error() string
+}
+
+var DB = mdb.ConnectDB()
+var Products = DB.Collection("users")
+
 func Index(w http.ResponseWriter, req *http.Request) {
+
+	var prods = &productsmodel.Product{}
+
 	if req.Method != http.MethodGet {
 		http.Error(w, http.StatusText(405), 405)
 		return
 	}
-	prods, err := productsmodel.AllProducts()
+
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	cur, err := Products.Find(ctx, prods)
 	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
+		err := ErrorResponse{
+			Err: "Error finding products",
+		}
+		json.NewEncoder(w).Encode(err)
 		return
 	}
-
-	prodj, err := json.Marshal(prods)
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
+	if err = cur.All(ctx, &prods); err != nil {
+		err := ErrorResponse{
+			Err: "Error finding products",
+		}
+		json.NewEncoder(w).Encode(err)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(200)
-	fmt.Fprintf(w, "%s\n", prodj)
-
+	json.NewEncoder(w).Encode(prods)
 }
