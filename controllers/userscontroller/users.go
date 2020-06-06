@@ -25,11 +25,10 @@ type error interface {
 var DB = mdb.ConnectDB()
 var Users = DB.Collection("users")
 
-func init() {
-	// TODO: create a go routine for tasks taking long
-	usersmodel.SetEmailIndex(Users)
-	usersmodel.SetUsernameIndex(Users)
-}
+// func init() {
+// 	// TODO: create a go routine for tasks taking long
+	
+// }
 
 func Signup(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "POST" {
@@ -64,6 +63,9 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	//Validate Pass not nil
+	usersmodel.SetEmailIndex(Users)
+	usersmodel.SetUsernameIndex(Users)
 	//validate password length
 	if len(user.Password) < 8 {
 		err := ErrorResponse{
