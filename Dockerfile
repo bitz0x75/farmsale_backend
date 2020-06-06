@@ -23,6 +23,7 @@ RUN go get "github.com/maxwellgithinji/farmsale_backend/config/mdb"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 RUN go get "github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
+RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
 
 #Import experimental packages
 RUN go get "golang.org/x/crypto/bcrypt"
