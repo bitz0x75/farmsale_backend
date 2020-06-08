@@ -9,8 +9,8 @@ import (
 	"runtime"
 	"runtime/pprof"
 
-	"github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
 	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
 )
 
 func main() {
@@ -24,6 +24,10 @@ func main() {
 
 	log.Println(http.ListenAndServe(":"+port, nil))
 	pprof.Lookup("goroutine").WriteTo(os.Stdout, 1)
+	// if err := agent.Start(); err != nil {
+	// 	log.Fatal(err)
+	// }
+	// time.Sleep(time.Hour)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {

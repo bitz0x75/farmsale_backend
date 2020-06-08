@@ -19,11 +19,11 @@ RUN touch /app/.env
 WORKDIR /app
 
 # #Import local packages
-RUN go get "github.com/maxwellgithinji/farmsale_backend/config/mdb"
-RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
-RUN go get "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
-RUN go get "github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
-RUN go get "github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/config/mdb"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
 
 #Import experimental packages
 RUN go get "golang.org/x/crypto/bcrypt"
