@@ -4,10 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"time"
 
-	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
 	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
 )
 
 type ErrorResponse struct {
@@ -18,9 +17,6 @@ type error interface {
 	Error() string
 }
 
-var DB = mdb.ConnectDB()
-var Products = DB.Collection("products")
-
 func Index(w http.ResponseWriter, req *http.Request) {
 
 	var prods = &productsmodel.Product{}
@@ -30,8 +26,8 @@ func Index(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	cur, err := Products.Find(ctx, prods)
+	ctx := context.Background()
+	cur, err := mdb.Products.Find(ctx, prods)
 	if err != nil {
 		err := ErrorResponse{
 			Err: "Error finding products",

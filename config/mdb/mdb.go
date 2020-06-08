@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"time"
 
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -27,12 +26,12 @@ func init() {
 
 func ConnectDB() *mongo.Database {
 	connstr := os.Getenv("DB_CONN_STR")
+	connstr = `mongodb+srv://maxgit:icuifourcu4@farmsale-hh9n7.gcp.mongodb.net/test?retryWrites=true&w=majority`
 	client, err := mongo.NewClient(options.Client().ApplyURI(connstr))
 	if err != nil {
 		panic(err)
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	ctx := context.Background()
 	err = client.Connect(ctx)
 	if err != nil {
 		panic(err)
@@ -64,3 +63,7 @@ func ConnectDB() *mongo.Database {
 		return DB
 	}
 }
+
+var db = ConnectDB()
+var Users = db.Collection("users")
+var Products = DB.Collection("products")

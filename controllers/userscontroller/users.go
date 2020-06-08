@@ -6,10 +6,9 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
-	"time"
 
-	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
 	"github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -22,12 +21,9 @@ type error interface {
 	Error() string
 }
 
-var DB = mdb.ConnectDB()
-var Users = DB.Collection("users")
-
 // func init() {
 // 	// TODO: create a go routine for tasks taking long
-	
+
 // }
 
 func Signup(w http.ResponseWriter, req *http.Request) {
@@ -35,8 +31,7 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
 		return
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	ctx := context.Background()
 
 	user := &usersmodel.User{}
 
@@ -64,8 +59,8 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 	}
 
 	//Validate Pass not nil
-	usersmodel.SetEmailIndex(Users)
-	usersmodel.SetUsernameIndex(Users)
+	usersmodel.SetEmailIndex(mdb.Users)
+	usersmodel.SetUsernameIndex(mdb.Users)
 	//validate password length
 	if len(user.Password) < 8 {
 		err := ErrorResponse{
@@ -101,7 +96,7 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 	user.Password = string(pass)
 
 	//Insert User
-	cur, err := Users.InsertOne(ctx, user)
+	cur, err := mdb.Users.InsertOne(ctx, user)
 	if err != nil {
 		fmt.Println(err, "my errr")
 		//Initialize exception to be thrown my mongo db duplicate data
