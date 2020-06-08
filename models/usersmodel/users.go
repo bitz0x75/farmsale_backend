@@ -34,7 +34,7 @@ func SetEmailIndex(coll *mongo.Collection) {
 		fmt.Println(err, "errrrrr====")
 		return
 	}
-	fmt.Println(indexName) // Output: title_-1
+	fmt.Println(indexName) // Output: email_-1
 	return
 }
 
@@ -53,6 +53,6 @@ func SetUsernameIndex(coll *mongo.Collection) {
 		fmt.Println(err, "errrrrr====")
 		return
 	}
-	fmt.Println(indexName) // Output: title_-1
+	fmt.Println(indexName) // Output: username_-1
 	return
 }

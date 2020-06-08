@@ -7,7 +7,6 @@ import (
 	_ "net/http/pprof"
 	"os"
 	"runtime"
-	"runtime/pprof"
 
 	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
 	"github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
@@ -23,7 +22,8 @@ func main() {
 	http.HandleFunc("/signup", userscontroller.Signup)
 
 	log.Println(http.ListenAndServe(":"+port, nil))
-	pprof.Lookup("goroutine").WriteTo(os.Stdout, 1)
+	fmt.Println("Go routines After", runtime.NumCgoCall())
+	// pprof.Lookup("goroutine").WriteTo(os.Stdout, 1)
 	// if err := agent.Start(); err != nil {
 	// 	log.Fatal(err)
 	// }
