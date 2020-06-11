@@ -34,7 +34,7 @@ func Index(w http.ResponseWriter, req *http.Request) {
 		err := ErrorResponse{
 			Err: "Error finding products",
 		}
-		w.Header().Set("Content-Type", "application/json")
+
 		json.NewEncoder(w).Encode(err)
 		return
 	}
@@ -44,11 +44,10 @@ func Index(w http.ResponseWriter, req *http.Request) {
 		err := ErrorResponse{
 			Err: "Error finding all products",
 		}
-		w.Header().Set("Content-Type", "application/json")
+
 		json.NewEncoder(w).Encode(err)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(prods)
 }
