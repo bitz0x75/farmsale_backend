@@ -10,25 +10,30 @@ Use go version 1.10 due to a known issue with [mongo-driver](https://github.com/
  ```
  {
  "email": "admin@user.com",
-  "password": "admin12345",
+  "password": "admin12345"
  }
  ```
  2. User
  ```
  {
   "email": "user@user.com",
-  "password": "user12345",}
+  "password": "user12345"
+  }
  ```
  3. Agent
  ```
+ {
  "email": "agent@user.com",
- "password": "agent12345",
+ "password": "agent12345"
+ }
  ```
  
  4. Manager
  ```
+ {
  "email": "manager@user.com",
- "password": "manager12345",
+ "password": "manager12345"
+ }
  ```
  
  ### Public Routes
