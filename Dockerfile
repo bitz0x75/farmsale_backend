@@ -24,6 +24,10 @@ RUN go get -u "github.com/maxwellgithinji/farmsale_backend/controllers/productsc
 RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
 RUN go get -u "github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/utils"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/middleware/auth"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/routes"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
 
 #Import experimental packages
 RUN go get "golang.org/x/crypto/bcrypt"

@@ -20,7 +20,10 @@ type error interface {
 }
 
 func Index(w http.ResponseWriter, req *http.Request) {
-
+	if req.Method != "GET" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
 	var prods = []productsmodel.Product{}
 	if req.Method != http.MethodGet {
 		http.Error(w, http.StatusText(405), 405)
@@ -34,7 +37,7 @@ func Index(w http.ResponseWriter, req *http.Request) {
 		err := ErrorResponse{
 			Err: "Error finding products",
 		}
-		w.Header().Set("Content-Type", "application/json")
+
 		json.NewEncoder(w).Encode(err)
 		return
 	}
@@ -44,11 +47,10 @@ func Index(w http.ResponseWriter, req *http.Request) {
 		err := ErrorResponse{
 			Err: "Error finding all products",
 		}
-		w.Header().Set("Content-Type", "application/json")
+
 		json.NewEncoder(w).Encode(err)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(prods)
 }

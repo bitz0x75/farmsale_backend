@@ -16,6 +16,8 @@ type User struct {
 	Password    string // `json:"password" bson:"password"`
 	Phonenumber string // `json:"phonenumber" bson:"phonenumber"`
 	Idnumber    int    // `json:"idnumber" bson:"idnumber"`
+	Userclass   string // `json:"userclass" bson:"userclass"`
+	Isadmin     bool   // `json:"isadmin" bson:"isadmin"`
 
 }
 
