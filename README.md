@@ -5,4 +5,4 @@ Use go version 1.10 due to a known issue with [mongo-driver](https://github.com/
 
 ## WORKING DEMO
 
-https://farmsaledev.herokuapp.com/products
+https://farmsaledev.herokuapp.com
