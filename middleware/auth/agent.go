@@ -3,11 +3,11 @@ package auth
 import (
 	"context"
 	"encoding/json"
-	"farmsale_backend/models/jwtmodel"
 	"fmt"
 	"net/http"
 
 	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
 )
 
 func AgentVerify(next http.Handler) http.Handler {

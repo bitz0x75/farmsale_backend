@@ -2,14 +2,14 @@ package routes
 
 import (
 	"encoding/json"
-	"farmsale_backend/controllers/productscontroller"
-	"farmsale_backend/controllers/userscontroller"
-	"farmsale_backend/middleware/auth"
-	"farmsale_backend/utils"
 	"net/http"
 	_ "net/http/pprof" // For dev only, dont push to production
 
 	"github.com/gorilla/mux"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/middleware/auth"
+	"github.com/maxwellgithinji/farmsale_backend/utils"
 )
 
 func RouteHandlers() *mux.Router {
@@ -88,6 +88,7 @@ func manager(w http.ResponseWriter, req *http.Request) {
 	}
 	json.NewEncoder(w).Encode(msg)
 }
+
 // CommonMiddleware --Set content-type
 func CommonMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

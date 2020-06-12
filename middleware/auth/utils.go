@@ -2,10 +2,11 @@ package auth
 
 import (
 	"encoding/json"
-	"farmsale_backend/utils"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/maxwellgithinji/farmsale_backend/utils"
 )
 
 var (
@@ -26,4 +27,3 @@ func verifyTokenHelper(w http.ResponseWriter, r *http.Request) string {
 	}
 	return tokenString
 }
-

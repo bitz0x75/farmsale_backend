@@ -3,13 +3,13 @@ package userscontroller
 import (
 	"context"
 	"encoding/json"
-	"farmsale_backend/config/mdb"
-	"farmsale_backend/models/usersmodel"
 	"fmt"
 	"log"
 	"net/http"
 	"regexp"
 
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
+	"github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -49,7 +49,7 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 	}
 
 	// validate request body values
-	if user.Username == "" || string(user.Password) == "" || user.Email == "" || user.Phonenumber == ""|| user.Userclass == "" || user.Idnumber == 0 {
+	if user.Username == "" || string(user.Password) == "" || user.Email == "" || user.Phonenumber == "" || user.Userclass == "" || user.Idnumber == 0 {
 		err := ErrorResponse{
 			Err: "All fields must be complete",
 		}
