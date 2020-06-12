@@ -3,12 +3,12 @@ package productscontroller
 import (
 	"context"
 	"encoding/json"
+	"farmsale_backend/config/mdb"
+	"farmsale_backend/models/productsmodel"
 	"fmt"
 	"net/http"
 
 	"github.com/globalsign/mgo/bson"
-	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
-	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 )
 
 type ErrorResponse struct {
@@ -20,7 +20,10 @@ type error interface {
 }
 
 func Index(w http.ResponseWriter, req *http.Request) {
-
+	if req.Method != "GET" {
+		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
+		return
+	}
 	var prods = []productsmodel.Product{}
 	if req.Method != http.MethodGet {
 		http.Error(w, http.StatusText(405), 405)

@@ -14,7 +14,7 @@ import (
 
 var (
 	//DB is our db initialization
-	DB *mongo.Database
+	DB      *mongo.Database
 )
 
 func init() {
@@ -25,10 +25,8 @@ func init() {
 	}
 }
 
-func ConnectDB() *mongo.Database {
-	connstr := os.Getenv("DB_CONN_STR")
-	connstr=`mongodb+srv://maxgit:icuifourcu4@farmsale-hh9n7.gcp.mongodb.net/test?retryWrites=true&w=majority`
-	client, err := mongo.NewClient(options.Client().ApplyURI(connstr))
+func connectDB() *mongo.Database {
+	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("DB_CONN_STR")))
 	if err != nil {
 		panic(err)
 	}
@@ -44,7 +42,7 @@ func ConnectDB() *mongo.Database {
 	os.Getenv("ENV")
 	if os.Getenv("ENV") == "development" {
 		DB = client.Database("farmsaleDev")
-		fmt.Println("You connected to DEV database") //For demo only
+		fmt.Println("You connected to DEVv database") //For demo only
 		return DB
 	} else if os.Getenv("ENV") == "production" {
 		DB = client.Database("farmsale")
@@ -66,6 +64,10 @@ func ConnectDB() *mongo.Database {
 	}
 }
 
-var db = ConnectDB()
+var db = connectDB()
+
+//Users collection
 var Users = db.Collection("users")
+
+//Products collection
 var Products = DB.Collection("products")
