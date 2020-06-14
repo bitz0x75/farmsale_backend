@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
+	"farmsale_backend/models/jwtmodel"
 )
 
 //AdminVerify verifies user is admin

@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/maxwellgithinji/farmsale_backend/utils"
+	"farmsale_backend/utils"
 )
 
 var (

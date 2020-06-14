@@ -7,8 +7,8 @@ import (
 	"net/http"
 
 	"github.com/globalsign/mgo/bson"
-	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
-	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
+	"farmsale_backend/config/mdb"
+	"farmsale_backend/models/productsmodel"
 )
 
 type ErrorResponse struct {

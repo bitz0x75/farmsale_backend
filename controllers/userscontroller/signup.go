@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"regexp"
 
-	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
-	"github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
+	"farmsale_backend/config/mdb"
+	"farmsale_backend/models/usersmodel"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )

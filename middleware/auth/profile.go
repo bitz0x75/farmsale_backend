@@ -8,9 +8,11 @@ import (
 	"net/http"
 
 	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/gorilla/mux"
 )
 
-func AgentVerify(next http.Handler) http.Handler {
+// CurrentUserVerify ensures only the logged in user can edit their details
+func CurrentUserVerify(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		tokenString := verifyTokenHelper(w, r)
@@ -18,22 +20,12 @@ func AgentVerify(next http.Handler) http.Handler {
 		token, err := jwt.ParseWithClaims(tokenString, &jwtmodel.Token{}, func(token *jwt.Token) (interface{}, error) {
 			return decodebs, nil
 		})
+		params := mux.Vars(r)
+
 		if claims, ok := token.Claims.(*jwtmodel.Token); ok && token.Valid {
-			if claims.Userclass != "agent" {
-				//Give the super admin the green light to access manager toute
-				if claims.Isadmin {
-					ctx := context.WithValue(r.Context(), "user", token)
-					next.ServeHTTP(w, r.WithContext(ctx))
-					return
-				}
-				//Give the manager oversight over their agents
-				if claims.Userclass == "manager" {
-					ctx := context.WithValue(r.Context(), "user", token)
-					next.ServeHTTP(w, r.WithContext(ctx))
-					return
-				}
+			if claims.Email != params["email"] {
 				w.WriteHeader(http.StatusForbidden)
-				json.NewEncoder(w).Encode(Exception{Message: "User not authorized, Admin or manager or agent only"})
+				json.NewEncoder(w).Encode(Exception{Message: "User not authorized"})
 				fmt.Println(err)
 				return
 			}
