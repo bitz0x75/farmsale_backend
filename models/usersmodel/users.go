@@ -11,15 +11,15 @@ import (
 
 type User struct {
 	// ID       bson.ObjectId // `json:"id" bson:"_id"`
-	Username    string // `json:"username" bson:"username"`
-	Email       string // `json:"email" bson:"email"`
-	Password    string // `json:"password" bson:"password"`
-	Phonenumber string // `json:"phonenumber" bson:"phonenumber"`
-	Idnumber    int    // `json:"idnumber" bson:"idnumber"`
-	Userclass   string // `json:"userclass" bson:"userclass"`
-	Isadmin     bool   // `json:"isadmin" bson:"isadmin"`
-	Isblacklisted bool // `json:"isblacklisted" bson:"isblacklisted"`
-	Isvalid bool // `json:"isvalid" bson:"isvalid"`
+	Username      string // `json:"username" bson:"username"`
+	Email         string // `json:"email" bson:"email"`
+	Password      string // `json:"password" bson:"password"`
+	Phonenumber   string // `json:"phonenumber" bson:"phonenumber"`
+	Idnumber      int    // `json:"idnumber" bson:"idnumber"`
+	Userclass     string // `json:"userclass" bson:"userclass"`
+	Isadmin       bool   // `json:"isadmin" bson:"isadmin"`
+	Isblacklisted bool   // `json:"isblacklisted" bson:"isblacklisted"`
+	Isvalid       bool   // `json:"isvalid" bson:"isvalid"`
 
 }
 

@@ -3,12 +3,12 @@ package userscontroller
 import (
 	"context"
 	"encoding/json"
+	"farmsale_backend/config/mdb"
+	"farmsale_backend/models/usersmodel"
 	"fmt"
 	"log"
 	"net/http"
 	"regexp"
-	"farmsale_backend/config/mdb"
-	"farmsale_backend/models/usersmodel"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
@@ -34,7 +34,7 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 	//default userclass is user and admin cannot signup normally
 	user.Userclass = "user"
 	user.Isadmin = false
-	user.Isvalid = true //TODO: implement user verification by email, Unverified users should be deleted after 1 day and cannot be able to interract with other endpoints
+	user.Isvalid = true        //TODO: implement user verification by email, Unverified users should be deleted after 1 day and cannot be able to interract with other endpoints
 	user.Isblacklisted = false //TODO: blacklisted users are those who violate the app policy, they can't interract with the app, but their data is kept since they have interracted with the app
 
 	// validate decoded values
