@@ -18,6 +18,8 @@ type User struct {
 	Idnumber    int    // `json:"idnumber" bson:"idnumber"`
 	Userclass   string // `json:"userclass" bson:"userclass"`
 	Isadmin     bool   // `json:"isadmin" bson:"isadmin"`
+	Isblacklisted bool // `json:"isblacklisted" bson:"isblacklisted"`
+	Isvalid bool // `json:"isvalid" bson:"isvalid"`
 
 }
 

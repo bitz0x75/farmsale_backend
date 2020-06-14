@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// CurrentUserVerify ensures only the logged in user can edit their details
+// CurrentUserVerify ensures only the profile owner can edit their details
 func CurrentUserVerify(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 

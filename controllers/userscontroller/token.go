@@ -2,26 +2,28 @@ package userscontroller
 
 import (
 	"encoding/json"
+	"farmsale_backend/models/jwtmodel"
+	"farmsale_backend/models/usersmodel"
 	"log"
 	"net/http"
 	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"farmsale_backend/models/jwtmodel"
-	"farmsale_backend/models/usersmodel"
 )
 
 func generateToken(w http.ResponseWriter, user *usersmodel.User) {
 	now := time.Now()
 
 	tk := &jwtmodel.Token{
-		Username:    user.Username,
-		Email:       user.Email,
-		Phonenumber: user.Phonenumber,
-		Idnumber:    user.Idnumber,
-		Userclass:   user.Userclass,
-		Isadmin:     user.Isadmin,
+		Username:      user.Username,
+		Email:         user.Email,
+		Phonenumber:   user.Phonenumber,
+		Idnumber:      user.Idnumber,
+		Userclass:     user.Userclass,
+		Isadmin:       user.Isadmin,
+		Isvalid:       user.Isvalid,
+		Isblacklisted: user.Isblacklisted,
 		StandardClaims: &jwt.StandardClaims{
 			ExpiresAt: now.Add(time.Minute * 100000).Unix(),
 			IssuedAt:  now.Unix(),
@@ -48,6 +50,6 @@ func generateToken(w http.ResponseWriter, user *usersmodel.User) {
 	//Store user token
 	var resp = map[string]interface{}{}
 	resp["token"] = tokenString
-	// resp["User"] = tk
+	resp["User"] = tk
 	json.NewEncoder(w).Encode(resp)
 }

@@ -3,12 +3,12 @@ package userscontroller
 import (
 	"context"
 	"encoding/json"
+	"farmsale_backend/config/mdb"
+	"farmsale_backend/models/usersmodel"
 	"fmt"
 	"log"
 	"net/http"
 
-	"farmsale_backend/config/mdb"
-	"farmsale_backend/models/usersmodel"
 	"go.mongodb.org/mongo-driver/bson"
 	"golang.org/x/crypto/bcrypt"
 )

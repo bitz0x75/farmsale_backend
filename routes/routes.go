@@ -32,6 +32,7 @@ func RouteHandlers() *mux.Router {
 	a := r.PathPrefix("/admin").Subrouter()
 	a.Use(auth.AdminVerify)
 	a.HandleFunc("/", admin).Methods("GET")
+	a.HandleFunc("/profile/delete/{email}", userscontroller.DeleteUser).Methods("DELETE")
 
 	//Manager Route
 	m := r.PathPrefix("/manager").Subrouter()
@@ -44,7 +45,7 @@ func RouteHandlers() *mux.Router {
 	ag.HandleFunc("/", agent).Methods("GET")
 	ag.HandleFunc("/profile/{email}", userscontroller.EditProfile).Methods("PUT")
 
-	//Logged in user only route
+	//Current user route
 	cu := r.PathPrefix("/profile").Subrouter()
 	cu.Use(auth.CurrentUserVerify)
 	cu.HandleFunc("/{email}", userscontroller.EditProfile).Methods("PUT")
