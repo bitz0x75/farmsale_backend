@@ -5,6 +5,7 @@ import (
 	"farmsale_backend/controllers/productscontroller"
 	"farmsale_backend/controllers/userscontroller"
 	"farmsale_backend/middleware/auth"
+	"farmsale_backend/middleware/common"
 	"farmsale_backend/utils"
 	"net/http"
 	_ "net/http/pprof" // For dev only, dont push to production
@@ -14,7 +15,7 @@ import (
 
 func RouteHandlers() *mux.Router {
 	r := mux.NewRouter().StrictSlash(true)
-	r.Use(CommonMiddleware)
+	r.Use(common.CommonMiddleware)
 
 	r.Handle("/favicon.ico", http.NotFoundHandler()).Methods("GET")
 
@@ -95,15 +96,4 @@ func manager(w http.ResponseWriter, req *http.Request) {
 		Msg: "Manager welcome to farmsale",
 	}
 	json.NewEncoder(w).Encode(msg)
-}
-
-// CommonMiddleware --Set content-type
-func CommonMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Content-Type", "application/json; charset=utf-8")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Access-Control-Request-Headers, Access-Control-Request-Method, Connection, Host, Origin, User-Agent, Referer, Cache-Control, X-header")
-		next.ServeHTTP(w, r)
-	})
 }
