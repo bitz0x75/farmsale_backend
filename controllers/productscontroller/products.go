@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"farmsale_backend/config/mdb"
-	"farmsale_backend/models/productsmodel"
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
+	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 	"github.com/globalsign/mgo/bson"
 )
 

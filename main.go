@@ -6,7 +6,7 @@ import (
 	_ "net/http/pprof" // For dev only, dont push to production
 	"os"
 
-	"farmsale_backend/routes"
+	"github.com/maxwellgithinji/farmsale_backend/routes"
 )
 
 func main() {

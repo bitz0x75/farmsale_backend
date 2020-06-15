@@ -2,8 +2,8 @@ package userscontroller
 
 import (
 	"encoding/json"
-	"farmsale_backend/models/jwtmodel"
-	"farmsale_backend/models/usersmodel"
+	"github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
+	"github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
 	"log"
 	"net/http"
 	"os"

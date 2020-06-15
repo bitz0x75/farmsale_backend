@@ -19,15 +19,15 @@ RUN touch /app/.env
 WORKDIR /app
 
 # #Import local packages
-RUN go get -u "farmsale_backend/config/mdb"
-RUN go get -u "farmsale_backend/controllers/productscontroller"
-RUN go get -u "farmsale_backend/models/productsmodel"
-RUN go get -u "farmsale_backend/models/usersmodel"
-RUN go get -u "farmsale_backend/controllers/userscontroller"
-RUN go get -u "farmsale_backend/utils"
-RUN go get -u "farmsale_backend/middleware/auth"
-RUN go get -u "farmsale_backend/routes"
-RUN go get -u "farmsale_backend/models/jwtmodel"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/config/mdb"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/utils"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/middleware/auth"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/routes"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
 
 #Import experimental packages
 RUN go get "golang.org/x/crypto/bcrypt"

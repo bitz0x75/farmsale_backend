@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"farmsale_backend/utils"
+	"github.com/maxwellgithinji/farmsale_backend/utils"
 	"net/http"
 	"os"
 	"strings"

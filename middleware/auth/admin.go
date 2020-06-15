@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"farmsale_backend/models/jwtmodel"
+	"github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
 	jwt "github.com/dgrijalva/jwt-go"
 )
 

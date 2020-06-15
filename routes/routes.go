@@ -2,11 +2,11 @@ package routes
 
 import (
 	"encoding/json"
-	"farmsale_backend/controllers/productscontroller"
-	"farmsale_backend/controllers/userscontroller"
-	"farmsale_backend/middleware/auth"
-	"farmsale_backend/middleware/common"
-	"farmsale_backend/utils"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/middleware/auth"
+	"github.com/maxwellgithinji/farmsale_backend/middleware/common"
+	"github.com/maxwellgithinji/farmsale_backend/utils"
 	"net/http"
 	_ "net/http/pprof" // For dev only, dont push to production
 

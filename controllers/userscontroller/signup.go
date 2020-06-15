@@ -3,8 +3,8 @@ package userscontroller
 import (
 	"context"
 	"encoding/json"
-	"farmsale_backend/config/mdb"
-	"farmsale_backend/models/usersmodel"
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
+	"github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
 	"fmt"
 	"log"
 	"net/http"

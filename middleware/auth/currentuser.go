@@ -3,7 +3,7 @@ package auth
 import (
 	"context"
 	"encoding/json"
-	"farmsale_backend/models/jwtmodel"
+	"github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
 	"fmt"
 	"net/http"
 
