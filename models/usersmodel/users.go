@@ -20,7 +20,7 @@ type User struct {
 	Isadmin       bool   // `json:"isadmin" bson:"isadmin"`
 	Isblacklisted bool   // `json:"isblacklisted" bson:"isblacklisted"`
 	Isvalid       bool   // `json:"isvalid" bson:"isvalid"`
-
+	Isactive       bool   // `json:"isactive" bson:"isactive"`
 }
 
 func SetEmailIndex(coll *mongo.Collection) {

@@ -34,6 +34,7 @@ func RouteHandlers() *mux.Router {
 	a.Use(auth.AdminVerify)
 	a.HandleFunc("/", admin).Methods("GET")
 	a.HandleFunc("/profile/delete/{email}", userscontroller.DeleteUser).Methods("DELETE")
+	a.HandleFunc("/profile/activate/{email}", userscontroller.ActivateDeactivateAccount).Methods("PUT")
 
 	//Manager Route
 	m := r.PathPrefix("/manager").Subrouter()

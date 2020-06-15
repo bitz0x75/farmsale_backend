@@ -3,10 +3,10 @@ package auth
 import (
 	"context"
 	"encoding/json"
+	"farmsale_backend/models/jwtmodel"
 	"fmt"
 	"net/http"
 
-	"farmsale_backend/models/jwtmodel"
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
@@ -20,7 +20,13 @@ func JwtVerify(next http.Handler) http.Handler {
 			return decodebs, nil
 		})
 
-		if _, ok := token.Claims.(*jwtmodel.Token); ok && token.Valid {
+		if claims, ok := token.Claims.(*jwtmodel.Token); ok && token.Valid {
+			if !claims.Isactive {
+				w.WriteHeader(http.StatusForbidden)
+				json.NewEncoder(w).Encode(Exception{Message: "User not authorized, request activation"})
+				fmt.Println(err)
+				return
+			}
 			ctx := context.WithValue(r.Context(), "user", token)
 			next.ServeHTTP(w, r.WithContext(ctx))
 		} else {

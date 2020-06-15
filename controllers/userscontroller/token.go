@@ -24,6 +24,7 @@ func generateToken(w http.ResponseWriter, user *usersmodel.User) {
 		Isadmin:       user.Isadmin,
 		Isvalid:       user.Isvalid,
 		Isblacklisted: user.Isblacklisted,
+		Isactive:      user.Isactive,
 		StandardClaims: &jwt.StandardClaims{
 			ExpiresAt: now.Add(time.Minute * 100000).Unix(),
 			IssuedAt:  now.Unix(),
