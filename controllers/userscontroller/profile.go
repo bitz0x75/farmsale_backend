@@ -13,6 +13,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -22,6 +23,7 @@ func EditProfile(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
 		return
 	}
+
 	ctx := context.Background()
 
 	user := &usersmodel.User{}
@@ -30,11 +32,21 @@ func EditProfile(w http.ResponseWriter, req *http.Request) {
 
 	params := mux.Vars(req)
 
-	var email = params["email"]
+	//id from params
+	strID := params["id"]
 
-	filter := bson.D{{"email", email}}
+	//Convert the id to primitive.ObjectID
+	id, err := primitive.ObjectIDFromHex(strID)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(err)
+		log.Fatal(err)
+	}
 
-	err := json.NewDecoder(req.Body).Decode(user)
+	//filter by the id
+	filter := bson.D{{"_id", id}}
+
+	err = json.NewDecoder(req.Body).Decode(user)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(err)
@@ -42,10 +54,10 @@ func EditProfile(w http.ResponseWriter, req *http.Request) {
 	}
 
 	// find the user
-	filterCursor, err := mdb.Users.Find(ctx, bson.M{"email": email})
+	filterCursor, err := mdb.Users.Find(ctx, bson.M{"_id": id})
 	if err != nil {
 		err := ErrorResponse{
-			Err: "Email is invalid",
+			Err: "ID is invalid",
 		}
 		w.WriteHeader(http.StatusNotAcceptable)
 		json.NewEncoder(w).Encode(err)
@@ -62,7 +74,7 @@ func EditProfile(w http.ResponseWriter, req *http.Request) {
 
 	if len(users) == 0 {
 		err := ErrorResponse{
-			Err: `User with email (` + email + `) not found`,
+			Err: `User with id (` + strID + `) not found`,
 		}
 		w.WriteHeader(http.StatusForbidden)
 		json.NewEncoder(w).Encode(err)
@@ -81,10 +93,11 @@ func EditProfile(w http.ResponseWriter, req *http.Request) {
 
 	user.Password = string(bs)
 
-	//TODO: replace search user by ID so they can update their email
+	
 	update := bson.D{{"$set",
 		bson.D{
 			{"username", user.Username},
+			{"email", user.Email},
 			{"password", user.Password},
 			{"phonenumber", user.Phonenumber},
 			{"idnumber", user.Idnumber},

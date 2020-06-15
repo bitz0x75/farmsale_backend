@@ -23,7 +23,7 @@ func CurrentUserVerify(next http.Handler) http.Handler {
 		params := mux.Vars(r)
 
 		if claims, ok := token.Claims.(*jwtmodel.Token); ok && token.Valid {
-			if claims.Email != params["email"] {
+			if claims.ID.Hex() != params["id"] {
 				w.WriteHeader(http.StatusForbidden)
 				json.NewEncoder(w).Encode(Exception{Message: "User not authorized"})
 				fmt.Println(err)

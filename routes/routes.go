@@ -27,14 +27,14 @@ func RouteHandlers() *mux.Router {
 	s := r.PathPrefix("/auth").Subrouter()
 	s.Use(auth.JwtVerify)
 	s.HandleFunc("/products", productscontroller.Index).Methods("GET")
-	s.HandleFunc("/profile/{email}", userscontroller.EditProfile).Methods("PUT")
+	s.HandleFunc("/profile/{id}", userscontroller.EditProfile).Methods("PUT")
 
 	//Admin Route
 	a := r.PathPrefix("/admin").Subrouter()
 	a.Use(auth.AdminVerify)
 	a.HandleFunc("/", admin).Methods("GET")
-	a.HandleFunc("/profile/delete/{email}", userscontroller.DeleteUser).Methods("DELETE")
-	a.HandleFunc("/profile/activate/{email}", userscontroller.ActivateDeactivateAccount).Methods("PUT")
+	a.HandleFunc("/profile/delete/{id}", userscontroller.DeleteUser).Methods("DELETE")
+	a.HandleFunc("/profile/activate/{id}", userscontroller.ActivateDeactivateAccount).Methods("PUT")
 
 	//Manager Route
 	m := r.PathPrefix("/manager").Subrouter()
@@ -45,13 +45,12 @@ func RouteHandlers() *mux.Router {
 	ag := r.PathPrefix("/agent").Subrouter()
 	ag.Use(auth.AgentVerify)
 	ag.HandleFunc("/", agent).Methods("GET")
-	ag.HandleFunc("/profile/{email}", userscontroller.EditProfile).Methods("PUT")
 
 	//Current user route
 	cu := r.PathPrefix("/profile").Subrouter()
 	cu.Use(auth.CurrentUserVerify)
-	cu.HandleFunc("/{email}", userscontroller.EditProfile).Methods("PUT")
-	cu.HandleFunc("/deactivate/{email}", userscontroller.DeactivateAccount).Methods("PUT")
+	cu.HandleFunc("/{id}", userscontroller.EditProfile).Methods("PUT")
+	cu.HandleFunc("/deactivate/{id}", userscontroller.DeactivateAccount).Methods("PUT")
 
 	return r
 }

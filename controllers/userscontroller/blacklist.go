@@ -12,6 +12,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 //BlacklistUser is for those users who have violated the terms of service
@@ -29,22 +30,32 @@ func BlacklistUser(w http.ResponseWriter, req *http.Request) {
 
 	params := mux.Vars(req)
 
-	var email = params["email"]
+	//id from params
+	strID := params["id"]
 
-	filter := bson.D{{"email", email}}
-
-	err := json.NewDecoder(req.Body).Decode(user)
+	//Convert the id to primitive.ObjectID
+	id, err := primitive.ObjectIDFromHex(strID)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(err)
 		log.Fatal(err)
 	}
 
-	//find the user
-	filterCursor, err := mdb.Users.Find(ctx, bson.M{"email": email})
+	//filter by the id
+	filter := bson.D{{"_id", id}}
+
+	err = json.NewDecoder(req.Body).Decode(user)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(err)
+		log.Fatal(err)
+	}
+
+	// find the user
+	filterCursor, err := mdb.Users.Find(ctx, bson.M{"_id": id})
 	if err != nil {
 		err := ErrorResponse{
-			Err: "Email is invalid",
+			Err: "ID is invalid",
 		}
 		w.WriteHeader(http.StatusNotAcceptable)
 		json.NewEncoder(w).Encode(err)
@@ -61,13 +72,14 @@ func BlacklistUser(w http.ResponseWriter, req *http.Request) {
 
 	if len(users) == 0 {
 		err := ErrorResponse{
-			Err: `User with email (` + email + `) not found`,
+			Err: `User with id (` + strID + `) not found`,
 		}
 		w.WriteHeader(http.StatusForbidden)
 		json.NewEncoder(w).Encode(err)
 		return
 	}
-	//TODO: replace search user by ID so they can update their email
+
+	
 	update := bson.D{{"$set",
 		bson.D{
 			{"isblacklisted", true},

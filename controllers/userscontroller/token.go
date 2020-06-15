@@ -16,6 +16,7 @@ func generateToken(w http.ResponseWriter, user *usersmodel.User) {
 	now := time.Now()
 
 	tk := &jwtmodel.Token{
+		ID:            user.ID,
 		Username:      user.Username,
 		Email:         user.Email,
 		Phonenumber:   user.Phonenumber,
