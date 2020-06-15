@@ -26,6 +26,7 @@ RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
 RUN go get -u "github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
 RUN go get -u "github.com/maxwellgithinji/farmsale_backend/utils"
 RUN go get -u "github.com/maxwellgithinji/farmsale_backend/middleware/auth"
+RUN go get -u "github.com/maxwellgithinji/farmsale_backend/middleware/common"
 RUN go get -u "github.com/maxwellgithinji/farmsale_backend/routes"
 RUN go get -u "github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
 
