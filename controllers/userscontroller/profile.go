@@ -16,6 +16,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+//EditProfile is only accessible to the owners of the credentials
 func EditProfile(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "PUT" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)

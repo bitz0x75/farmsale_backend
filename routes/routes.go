@@ -51,6 +51,7 @@ func RouteHandlers() *mux.Router {
 	cu := r.PathPrefix("/profile").Subrouter()
 	cu.Use(auth.CurrentUserVerify)
 	cu.HandleFunc("/{email}", userscontroller.EditProfile).Methods("PUT")
+	cu.HandleFunc("/deactivate/{email}", userscontroller.DeactivateAccount).Methods("PUT")
 
 	return r
 }

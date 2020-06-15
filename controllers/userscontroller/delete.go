@@ -14,6 +14,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
+//DeleteUser is an admin only functionality and this completely removes user accounts
 func DeleteUser(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "DELETE" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)

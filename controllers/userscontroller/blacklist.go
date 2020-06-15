@@ -14,6 +14,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
+//BlacklistUser is for those users who have violated the terms of service
+//they can no longer access the app, but their data will still be kept
 func BlacklistUser(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "PUT" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)

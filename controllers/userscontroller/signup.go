@@ -22,6 +22,7 @@ type error interface {
 	Error() string
 }
 
+//Signup is where the users register to the app
 func Signup(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "POST" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)

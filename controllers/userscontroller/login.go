@@ -13,6 +13,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+//Login is the entry point of the application after registration
 func Login(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "POST" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
