@@ -3,13 +3,14 @@ package userscontroller
 import (
 	"context"
 	"encoding/json"
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
+	"github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
 	"fmt"
 	"log"
 	"net/http"
 	"regexp"
 
-	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
-	"github.com/maxwellgithinji/farmsale_backend/models/usersmodel"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -22,6 +23,7 @@ type error interface {
 	Error() string
 }
 
+//Signup is where the users register to the app
 func Signup(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "POST" {
 		http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
@@ -34,6 +36,9 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 	//default userclass is user and admin cannot signup normally
 	user.Userclass = "user"
 	user.Isadmin = false
+	user.Isvalid = true        //TODO: implement user verification by email, Unverified users should be deleted after 1 day and cannot be able to interract with other endpoints
+	user.Isblacklisted = false //TODO: blacklisted users are those who violate the app policy, they can't interract with the app, but their data is kept since they have interracted with the app
+	user.Isactive = true       //TODO: a user who is inactive can no longer login but they have already interracted with the app
 
 	// validate decoded values
 	err := json.NewDecoder(req.Body).Decode(user)
@@ -97,6 +102,9 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 
 	user.Password = string(bs)
 
+	//generate a bson user id
+	user.ID = primitive.NewObjectID()
+
 	//Insert User
 	cur, err := mdb.Users.InsertOne(ctx, user)
 	if err != nil {
@@ -119,6 +127,7 @@ func Signup(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	log.Println(cur)
+
 	//Generate token on signup
 	generateToken(w, user)
 }

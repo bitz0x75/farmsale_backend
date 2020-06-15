@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/globalsign/mgo/bson"
 	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
 	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
+	"github.com/globalsign/mgo/bson"
 )
 
 type ErrorResponse struct {

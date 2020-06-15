@@ -3,11 +3,11 @@ package auth
 import (
 	"context"
 	"encoding/json"
+	"github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
 	"fmt"
 	"net/http"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
 )
 
 func AgentVerify(next http.Handler) http.Handler {
@@ -18,7 +18,6 @@ func AgentVerify(next http.Handler) http.Handler {
 		token, err := jwt.ParseWithClaims(tokenString, &jwtmodel.Token{}, func(token *jwt.Token) (interface{}, error) {
 			return decodebs, nil
 		})
-
 		if claims, ok := token.Claims.(*jwtmodel.Token); ok && token.Valid {
 			if claims.Userclass != "agent" {
 				//Give the super admin the green light to access manager toute

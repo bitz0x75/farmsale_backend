@@ -1,12 +1,10 @@
 package auth
 
 import (
-	"encoding/json"
+	"github.com/maxwellgithinji/farmsale_backend/utils"
 	"net/http"
 	"os"
 	"strings"
-
-	"github.com/maxwellgithinji/farmsale_backend/utils"
 )
 
 var (
@@ -20,9 +18,6 @@ func verifyTokenHelper(w http.ResponseWriter, r *http.Request) string {
 	var tokenString = r.Header.Get("Authorization") //Grab the token from the header
 	tokenString = strings.Split(tokenString, "Bearer ")[1]
 	if tokenString == "" {
-		//Token is missing, returns with error code 403 Unauthorized
-		w.WriteHeader(http.StatusForbidden)
-		json.NewEncoder(w).Encode(Exception{Message: "Missing auth token"})
 		return ""
 	}
 	return tokenString

@@ -14,7 +14,8 @@ import (
 
 var (
 	//DB is our db initialization
-	DB      *mongo.Database
+	DB  *mongo.Database
+	opt *options.ClientOptions
 )
 
 func init() {
@@ -23,13 +24,17 @@ func init() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
+	opt = options.Client().ApplyURI(os.Getenv("DB_CONN_STR"))
 }
 
 func connectDB() *mongo.Database {
-	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("DB_CONN_STR")))
+
+	client, err := mongo.NewClient(opt)
 	if err != nil {
 		panic(err)
 	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	err = client.Connect(ctx)

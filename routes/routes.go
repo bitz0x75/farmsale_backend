@@ -2,19 +2,20 @@ package routes
 
 import (
 	"encoding/json"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
+	"github.com/maxwellgithinji/farmsale_backend/middleware/auth"
+	"github.com/maxwellgithinji/farmsale_backend/middleware/common"
+	"github.com/maxwellgithinji/farmsale_backend/utils"
 	"net/http"
 	_ "net/http/pprof" // For dev only, dont push to production
 
 	"github.com/gorilla/mux"
-	"github.com/maxwellgithinji/farmsale_backend/controllers/productscontroller"
-	"github.com/maxwellgithinji/farmsale_backend/controllers/userscontroller"
-	"github.com/maxwellgithinji/farmsale_backend/middleware/auth"
-	"github.com/maxwellgithinji/farmsale_backend/utils"
 )
 
 func RouteHandlers() *mux.Router {
 	r := mux.NewRouter().StrictSlash(true)
-	r.Use(CommonMiddleware)
+	r.Use(common.CommonMiddleware)
 
 	r.Handle("/favicon.ico", http.NotFoundHandler()).Methods("GET")
 
@@ -26,11 +27,14 @@ func RouteHandlers() *mux.Router {
 	s := r.PathPrefix("/auth").Subrouter()
 	s.Use(auth.JwtVerify)
 	s.HandleFunc("/products", productscontroller.Index).Methods("GET")
+	s.HandleFunc("/profile/{id}", userscontroller.EditProfile).Methods("PUT")
 
 	//Admin Route
 	a := r.PathPrefix("/admin").Subrouter()
 	a.Use(auth.AdminVerify)
 	a.HandleFunc("/", admin).Methods("GET")
+	a.HandleFunc("/profile/delete/{id}", userscontroller.DeleteUser).Methods("DELETE")
+	a.HandleFunc("/profile/activate/{id}", userscontroller.ActivateDeactivateAccount).Methods("PUT")
 
 	//Manager Route
 	m := r.PathPrefix("/manager").Subrouter()
@@ -41,6 +45,12 @@ func RouteHandlers() *mux.Router {
 	ag := r.PathPrefix("/agent").Subrouter()
 	ag.Use(auth.AgentVerify)
 	ag.HandleFunc("/", agent).Methods("GET")
+
+	//Current user route
+	cu := r.PathPrefix("/profile").Subrouter()
+	cu.Use(auth.CurrentUserVerify)
+	cu.HandleFunc("/{id}", userscontroller.EditProfile).Methods("PUT")
+	cu.HandleFunc("/deactivate/{id}", userscontroller.DeactivateAccount).Methods("PUT")
 
 	return r
 }
@@ -87,15 +97,4 @@ func manager(w http.ResponseWriter, req *http.Request) {
 		Msg: "Manager welcome to farmsale",
 	}
 	json.NewEncoder(w).Encode(msg)
-}
-
-// CommonMiddleware --Set content-type
-func CommonMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Content-Type", "application/json; charset=utf-8")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Access-Control-Request-Headers, Access-Control-Request-Method, Connection, Host, Origin, User-Agent, Referer, Cache-Control, X-header")
-		next.ServeHTTP(w, r)
-	})
 }

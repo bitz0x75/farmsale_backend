@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/maxwellgithinji/farmsale_backend/models/jwtmodel"
+	jwt "github.com/dgrijalva/jwt-go"
 )
 
 //AdminVerify verifies user is admin
