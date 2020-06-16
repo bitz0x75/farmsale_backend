@@ -10,7 +10,7 @@ Use go version 1.10 due to a known issue with [mongo-driver](https://github.com/
  ```
  {
  "email": "admin@user.com",
-  "password": "admin12345"
+ "password": "user12345"
  }
  ```
  2. User
@@ -24,7 +24,7 @@ Use go version 1.10 due to a known issue with [mongo-driver](https://github.com/
  ```
  {
  "email": "agent@user.com",
- "password": "agent12345"
+ "password": "user12345"
  }
  ```
  
@@ -32,7 +32,7 @@ Use go version 1.10 due to a known issue with [mongo-driver](https://github.com/
  ```
  {
  "email": "manager@user.com",
- "password": "manager12345"
+ "password": "user12345"
  }
  ```
  
@@ -53,4 +53,4 @@ Use go version 1.10 due to a known issue with [mongo-driver](https://github.com/
 
 ## WORKING DEMO
 
-https://farmsaledev.herokuapp.com
+https://farmsaledev.herokuapp.com/api/v1/
