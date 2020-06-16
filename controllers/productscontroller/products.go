@@ -3,11 +3,11 @@ package productscontroller
 import (
 	"context"
 	"encoding/json"
+	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
+	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 	"fmt"
 	"net/http"
 
-	"github.com/maxwellgithinji/farmsale_backend/config/mdb"
-	"github.com/maxwellgithinji/farmsale_backend/models/productsmodel"
 	"github.com/globalsign/mgo/bson"
 )
 
