@@ -37,19 +37,19 @@ Use go version 1.10 due to a known issue with [mongo-driver](https://github.com/
  ```
  
  ### Public Routes
-`GET https://farmsaledev.herokuapp.com`
+`GET https://farmsaledev.herokuapp.com/api/v1`
 
 ### User authenticated route
-`GET https://farmsaledev.herokuapp.com/auth/products`
+`GET https://farmsaledev.herokuapp.com/api/v1/auth/products`
 
 ### Admin Routes
-`GET https://farmsaledev.herokuapp.com/admin`
+`GET https://farmsaledev.herokuapp.com/api/v1/admin`
 
 ### Manager Routes
-`GET https://farmsaledev.herokuapp.com/manager`
+`GET https://farmsaledev.herokuapp.com/api/v1/manager`
 
 ### AgentRoutes
-`GET https://farmsaledev.herokuapp.com/agent`
+`GET https://farmsaledev.herokuapp.com/api/v1/agent`
 
 ## WORKING DEMO
 
